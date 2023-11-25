@@ -14,7 +14,8 @@ class Player(User):
     def __init__(self, name = 'Player', control = 'Manual', pokemon = None):
         super().__init__(name, control, pokemon)
 
-   
+    def get_name(self):
+        return self.name
 
     def select_pokemon(self, pokemon_list):
         window = tk.Tk()
@@ -49,7 +50,8 @@ class Bot(User):
         self.pokemon = random.choice(pokemon_list)
         while self.pokemon == other_pokemon:
             self.pokemon = random.choice(pokemon_list)
-
+    def get_name(self):
+        return self.name
 
 # pokemon_list = create_list_of_pokemon()
 # player1 = Player('rico', 'Manual', pokemon_list)
