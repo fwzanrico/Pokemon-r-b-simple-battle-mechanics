@@ -28,10 +28,10 @@ def battle(player1, player2):
     player1_frame.pack(side=tk.BOTTOM)    
     player2_frame = tk.Frame(battle_window)     
     player2_frame.pack(side=tk.TOP)   
-    player1_name = tk.Label(player1_frame, text=player1.pokemon.get_name())
+    player1_name = tk.Label(player1_frame, text=f" {player1.pokemon.get_name()} {player1.pokemon.get_hp()}  ")
     player1_name.pack()
  
-    player2_name = tk.Label(player2_frame, text=player2.pokemon.get_name())
+    player2_name = tk.Label(player2_frame, text=f" {player2.pokemon.get_name()} {player2.pokemon.get_hp()}  " )
     player2_name.pack()
 
     pokemon1 = player1.pokemon
@@ -99,6 +99,8 @@ def battle(player1, player2):
             battle_window.destroy()
     battle_window.after(1000, battle_loop)
     battle_window.mainloop()
+    battle_window.destroy()
+    
 
 if __name__ == '__main__':
     main()

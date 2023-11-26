@@ -1,6 +1,7 @@
 import random
 import time
 import tkinter as tk
+from PIL import Image, ImageTk
 from abc import ABC, abstractmethod
 from tkinter import messagebox
 class User(ABC):
@@ -25,8 +26,19 @@ class Player(User):
 
         frame = tk.Frame(window)
         frame.pack(padx=50, pady=50)
+        
+        image1 = Image.open('pokemon_img/title.png')
+        resized_image =image1.resize((100,100),Image.LANCZOS)
+        photo1 = ImageTk.PhotoImage(resized_image)
+        label1 = tk.Label(frame, image=photo1)
+        label2 = tk.Label(frame, image=photo1)
+        
+        label1.pack(side=tk.LEFT)
+        label2.pack(side=tk.RIGHT)
+        
+        
 
-        label = tk.Label(frame, text='Select your pokemon')
+        label = tk.Label(frame, text='SELECT YOUR POKEMON', font=("Bebas Nueue", 10, "bold"))
         label.pack()
         
         selected_pokemon = tk.Listbox(frame)
