@@ -1,5 +1,4 @@
 import random
-import time
 import tkinter as tk
 from PIL import Image, ImageTk
 from abc import ABC, abstractmethod
@@ -106,8 +105,3 @@ class Bot(User):
         move = random.choice(self.pokemon.get_Skills())
         self.pokemon.attack(other_pokemon, move)
 
-# pokemon_list = create_list_of_pokemon()
-# player1 = Player('rico', 'Manual', pokemon_list)
-# player1.select_pokemon(pokemon_list)
-# name = player1.pokemon.get_hp()
-# print(name)

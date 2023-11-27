@@ -1,8 +1,6 @@
 from createpokemondb import *
-import threading as td
 from user_classifier import *
 import tkinter as tk
-from PIL import Image, ImageTk
 import time
 
 
@@ -40,58 +38,58 @@ def battle(player1, player2):
     health1_bar = tk.Canvas(player1_frame, width=100, height=20, bg='red')
     health1_bar.pack()
     health1_rect_id = health1_bar.create_rectangle(0, 0, 100, 20, fill='green')
-    
     pokemon1_base_health = pokemon1.get_hp()
+    #pokemon1 image
     pokemon1_png = tk.PhotoImage(file=pokemon1.get_png())
-
     pokemon1_image = tk.Label(player1_frame, image=pokemon1_png)
     pokemon1_image.pack()
 
     health2_bar = tk.Canvas(player2_frame, width=100, height=20, bg='red')
     health2_bar.pack()
     health2_rect_id =health2_bar.create_rectangle(0, 0, 100, 20, fill='green')
-
+    #pokemon2 image
     pokemon2_png = tk.PhotoImage(file=pokemon2.get_png())
     pokemon2_image = tk.Label(player2_frame, image=pokemon2_png)
     pokemon2_image.pack()
 
     pokemon2_base_health = pokemon2.get_hp()
+    
     print(f"Battle between {player1.pokemon.get_name()} and {player2.pokemon.get_name()}")
     def battle_loop():
-        
+        # make bar health pokemon 1
         health1 = pokemon1.get_hp()
         health1_percent = health1 / pokemon1_base_health
         health1_bar.coords(health1_rect_id, 0, 0, health1_percent * 100, 20)
-
+        # make bar health pokemon 2 
         health2 = pokemon2.get_hp()
         health2_percent = health2 / pokemon2_base_health
         health2_bar.coords(health2_rect_id, 0, 0, health2_percent * 100, 20)
 
 
-        # selected_move_pokemon1 = random.choice(pokemon1.get_Skills())
-        # pokemon1.attack(pokemon2, selected_move_pokemon1)
-        
-        player1.take_turn(pokemon2, battle_window)
+        # Pokemon 1 attacks Pokemon 2
+        if pokemon1.get_hp() <= 0:
+            print(f"{pokemon1.get_name()} fainted!")
+            health1_bar.coords(health1_rect_id, 0, 0, 0, 20)
+            messagebox.showinfo('Battle', f'{pokemon1.get_name()} Fainted!')
+            messagebox.showinfo('Battle', f'{pokemon2.get_name()} Wins!')
+            return
+        else:  
+            player1.take_turn(pokemon2, battle_window)
         
         # Check if Pokemon 2 fainted
-        # battle_window.wait_variable(player1.move_selected)
-
         if pokemon2.get_hp() <= 0:
+            health2_bar.coords(health2_rect_id, 0, 0, 0, 20)
             print(f"{pokemon2.get_name()} fainted!")
             messagebox.showinfo('Battle', f'{pokemon2.get_name()} Fainted!')
             messagebox.showinfo('Battle', f'{pokemon1.get_name()} Wins!')
             return
-
+        else:
         # Pokemon 2 attacks Pokemon 1
-        player2.take_turn(pokemon1)
+            player2.take_turn(pokemon1)
 
         # Check if Pokemon 1 fainted
-        if pokemon1.get_hp() <= 0:
-            print(f"{pokemon1.get_name()} fainted!")
-            messagebox.showinfo('Battle', f'{pokemon1.get_name()} Fainted!')
-            messagebox.showinfo('Battle', f'{pokemon2.get_name()} Wins!')
-            return
-        print(f"\n{pokemon1.get_name()} HP: {pokemon1.get_hp()} \ {pokemon2.get_hp()}\n")
+
+        print(f"\n{pokemon1.get_name()} |{pokemon2.get_name()} HP: {pokemon1.get_hp()} | {pokemon2.get_hp()}\n")
         if health1 > 0 or health2 > 0:
             battle_window.after(1000, battle_loop)
         else:
