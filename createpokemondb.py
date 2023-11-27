@@ -1,8 +1,4 @@
-import csv
-import os
 import random
-import time
-from abc import ABC, abstractmethod
 from tkinter import messagebox
 element_weakness = {'fire': 'water', 'water': 'grass', 'grass': 'fire', 'ice': 'fire', 'electric': 'water'}
 class Move():
@@ -22,7 +18,7 @@ class Move():
         return self.__Effect
     def get_duration(self):
         return self.__Duration
-class Pokemon(ABC):
+class Pokemon():
     def __init__(self, Name, HP, Attack, Defense, Sp_attack, Sp_defense, Speed, Elemental, Type, Moves, png) -> None:
         self.__name = Name
         self.__HP = HP

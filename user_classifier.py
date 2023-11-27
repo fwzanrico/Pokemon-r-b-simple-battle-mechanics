@@ -1,5 +1,4 @@
 import random
-import time
 import tkinter as tk
 from abc import ABC, abstractmethod
 from tkinter import messagebox

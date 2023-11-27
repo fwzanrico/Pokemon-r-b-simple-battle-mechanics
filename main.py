@@ -1,8 +1,6 @@
 from createpokemondb import *
-import threading as td
 from user_classifier import *
 import tkinter as tk
-import pygame
 import time
 
 
@@ -91,7 +89,7 @@ def battle(player1, player2):
 
         # Check if Pokemon 1 fainted
 
-        print(f"\n{pokemon1.get_name()} HP: {pokemon1.get_hp()} \ {pokemon2.get_hp()}\n")
+        print(f"\n{pokemon1.get_name()} |{pokemon2.get_name()} HP: {pokemon1.get_hp()} | {pokemon2.get_hp()}\n")
         if health1 > 0 or health2 > 0:
             battle_window.after(1000, battle_loop)
         else:
