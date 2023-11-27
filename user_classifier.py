@@ -22,19 +22,25 @@ class Player(User):
     def select_pokemon(self, pokemon_list):
         window = tk.Tk()
         window.title('Pokemon Selection')
-        window.geometry('500x500')
+        window.geometry('1000x1000')
 
         frame = tk.Frame(window)
         frame.pack(padx=50, pady=50)
         
         image1 = Image.open('pokemon_img/title.png')
-        resized_image =image1.resize((100,100),Image.LANCZOS)
+        image2 = Image.open('pokemon_img/title2.png')
+        resized_image2 =image2.resize((500,400),Image.Resampling.LANCZOS)
+        resized_image =image1.resize((200,200),Image.LANCZOS)
         photo1 = ImageTk.PhotoImage(resized_image)
+        photo2 = ImageTk.PhotoImage(resized_image2)
+        
         label1 = tk.Label(frame, image=photo1)
         label2 = tk.Label(frame, image=photo1)
+        label3 = tk.Label(frame, image=photo2)
         
         label1.pack(side=tk.LEFT)
         label2.pack(side=tk.RIGHT)
+        label3.pack(side=tk.TOP)
         
         
 
@@ -42,7 +48,7 @@ class Player(User):
         label.pack()
         
         selected_pokemon = tk.Listbox(frame)
-        selected_pokemon.pack(anchor=tk.W)
+        selected_pokemon.pack(anchor=tk.CENTER)
 
         for i,pokemon in enumerate(pokemon_list):
             temp_list = []
